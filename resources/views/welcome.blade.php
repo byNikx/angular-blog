@@ -91,31 +91,43 @@
 
       <nx-container layout="row" layout-margin>
         <section flex>
-              <h3 class="md-headline label-type-1">Yesterday</h3>
-            <div class="post-wrapper type-1" ng-repeat="img in [
-                'https://awcdn1.ahmad.works/writing/wp-content/uploads/2015/05/Blue-Sea-Water-940x400.jpg',
-                'https://awcdn1.ahmad.works/writing/wp-content/uploads/2015/05/Tea-and-Flowers-940x400.jpg',
-                'https://awcdn1.ahmad.works/writing/wp-content/uploads/2015/05/People-Top-View-940x400.jpg']">
-              <nx-paper>
-                <section class="toolbar" layout-padding layout>
-                  <span flex></span>
-                  <md-button class="md-icon-button" ng-repeat="icon in ['more_vert']">
-                    <md-icon>{[{icon}]}</md-icon>
-                  </md-button>
-                </section>
-                <img ng-src="{[{img}]}" style="max-width:100%;"/>
-                <div class="" layout="row" layout-padding>
-                  <img src="https://assets.materialup.com/uploads/0dc82787-3b7e-4f9f-8199-9706f4daaf6c/avatar.png" class="md-avatar" style="width:50px; height:50px; border-radius:50px;"/>
-                  <div>
-                    <h3 class="md-title" style="margin:0;">
-                      <a href="#" class="post-title">Restaurant Employer Read Clients Orders On His iPad</a>
-                    </h3>
-                    <span class="md-subead">by Erik Padamans in User Interfaces</span>
-                  </div>
-
-                </div>
-              </nx-paper>
-            </div>
+            <h3 class="md-headline label-type-1" layout-margin>Yesterday</h3>
+            <md-card>
+        <md-card-header>
+          <md-card-avatar>
+            <img src="https://material.angularjs.org/latest/img/logo.svg"/>
+          </md-card-avatar>
+          <md-card-header-text>
+            <span class="md-title">Angular</span>
+            <span class="md-subhead">Material</span>
+          </md-card-header-text>
+        </md-card-header>
+        <img ng-src="https://awcdn1.ahmad.works/writing/wp-content/uploads/2015/05/Resturant-Employer-940x400.jpg" class="md-card-image" alt="Washed Out">
+        <md-card-title>
+         <md-card-title-text>
+           <span class="md-headline">In-card mixed actions</span>
+           <ul style="margin:0;padding:0; list-style:none;">
+             <li ng-repeat="i in [1,2,3,4]" style="display:inline-block;">{[{i}]}</li>
+           </ul>
+         </md-card-title-text>
+       </md-card-title>
+        <md-card-content>
+          <p>
+            The titles of Washed Out's breakthrough song and the first single from Paracosm share the
+            two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
+          </p>
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="start center" layout-padding>
+          <div style="padding:0;">
+            <md-button class="md-raised md-primary">Continue Reading</md-button>
+          </div>
+          <md-card-icon-actions hide>
+            <md-button class="md-icon-button" aria-label="toggle">
+              <md-icon>arrow_drop_down</md-icon>
+            </md-button>
+          </md-card-icon-actions>
+        </md-card-actions>
+      </md-card>
         </section>
         <section style="width:300px;" hide-xs>
           <h3 class="md-headline label-type-1">Recent Activity</h3>
