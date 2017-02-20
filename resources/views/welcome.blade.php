@@ -99,6 +99,89 @@
      .tag-list li:last-child{
        margin-right: 0;
      }
+
+
+
+
+.gridListdemoDynamicTiles md-icon {
+  width: 50%;
+  height: 30%; }
+
+.gridListdemoDynamicTiles md-icon svg {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%; }
+
+.gridListdemoDynamicTiles .s64 {
+  font-size: 64px; }
+
+.gridListdemoDynamicTiles .s32 {
+  font-size: 48px; }
+
+.gridListdemoDynamicTiles md-icon.fa {
+  display: block;
+  padding-left: 0; }
+
+.gridListdemoDynamicTiles md-icon.s32 span {
+  padding-left: 8px; }
+
+.gridListdemoDynamicTiles md-grid-list {
+  margin: 8px; }
+
+.gridListdemoDynamicTiles .gray {
+  background: #f5f5f5; }
+
+.gridListdemoDynamicTiles .green {
+  background: #b9f6ca; }
+
+.gridListdemoDynamicTiles .yellow {
+  background: #ffff8d; }
+
+.gridListdemoDynamicTiles .blue {
+  background: #84ffff; }
+
+.gridListdemoDynamicTiles .darkBlue {
+  background: #80d8ff; }
+
+.gridListdemoDynamicTiles .deepBlue {
+  background: #448aff; }
+
+.gridListdemoDynamicTiles .purple {
+  background: #b388ff; }
+
+.gridListdemoDynamicTiles .lightPurple {
+  background: #8c9eff; }
+
+.gridListdemoDynamicTiles .red {
+  background: #ff8a80; }
+
+.gridListdemoDynamicTiles .pink {
+  background: #ff80ab; }
+
+.gridListdemoDynamicTiles md-grid-tile {
+  transition: all 300ms ease-out 50ms; }
+
+.gridListdemoDynamicTiles md-grid-tile md-icon {
+  padding-bottom: 32px; }
+
+.gridListdemoDynamicTiles md-grid-tile md-grid-tile-footer {
+  background: rgba(0, 0, 0, 0.68);
+  height: 36px; }
+
+.gridListdemoDynamicTiles md-grid-tile-footer figcaption {
+  width: 100%; }
+
+.gridListdemoDynamicTiles md-grid-tile-footer figcaption h3 {
+  margin: 0;
+  font-weight: 700;
+  width: 100%;
+  text-align: center; }
+
+
+
+
+
+
     </style>
 
     <title>Angular Laravel - App</title>
@@ -312,7 +395,25 @@
                   <span class="md-subhead">2 days ago</span>
                 </md-card-header-text>
               </md-card-header>
-              
+
+              <div ng-controller="gridListDemoCtrl as vm" flex ng-cloak style="background-color:#dadada" class="gridListdemoDynamicTiles">
+                <md-grid-list
+                      md-cols="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="6"
+                      md-row-height-gt-md="1:1" md-row-height="4:3"
+                      md-gutter="8px" md-gutter-gt-sm="4px" >
+
+                  <md-grid-tile ng-repeat="tile in vm.tiles"
+                                md-rowspan="{[{tile.span.row}]}"
+                                md-colspan="{[{tile.span.col}]}"
+                                md-colspan-sm="1"
+                                md-colspan-xs="1"
+                                ng-class="tile.background" >
+                    <md-icon md-svg-icon="{[{tile.icon}]}"></md-icon>
+                    <md-grid-tile-footer><h3>{[{tile.title}]}</h3></md-grid-tile-footer>
+                  </md-grid-tile>
+                </md-grid-list>
+              </div>
+
               <md-card-title>
                <md-card-title-text>
                  <div>
@@ -322,6 +423,7 @@
                  </div>
                </md-card-title-text>
              </md-card-title>
+
               <md-card-content>
                 <p>
                   The titles of Washed Out's breakthrough song and the first single from Paracosm share the
@@ -378,7 +480,61 @@
       */
       var app = angular.module('NXBlog', ['ngMaterial']);
 
-      app.config(['$interpolateProvider', function($interpolateProvider){
+
+      app.controller('gridListDemoCtrl', function($scope) {
+
+        this.tiles = buildGridModel({
+                icon : "avatar:svg-",
+                title: "Svg-",
+                background: ""
+              });
+
+        function buildGridModel(tileTmpl){
+          var it, results = [ ];
+
+          for (var j=0; j<11; j++) {
+
+            it = angular.extend({},tileTmpl);
+            it.icon  = it.icon + (j+1);
+            it.title = it.title + (j+1);
+            it.span  = { row : 1, col : 1 };
+
+            switch(j+1) {
+              case 1:
+                it.background = "red";
+                it.span.row = it.span.col = 2;
+                break;
+
+              case 2: it.background = "green";         break;
+              case 3: it.background = "darkBlue";      break;
+              case 4:
+                it.background = "blue";
+                it.span.col = 2;
+                break;
+
+              case 5:
+                it.background = "yellow";
+                it.span.row = it.span.col = 2;
+                break;
+
+              case 6: it.background = "pink";          break;
+              case 7: it.background = "darkBlue";      break;
+              case 8: it.background = "purple";        break;
+              case 9: it.background = "deepBlue";      break;
+              case 10: it.background = "lightPurple";  break;
+              case 11: it.background = "yellow";       break;
+            }
+
+            results.push(it);
+          }
+          return results;
+        }
+      });
+
+      app.config(['$interpolateProvider', '$mdThemingProvider', function($interpolateProvider, $mdThemingProvider){
+        $mdThemingProvider.theme('default')
+        .primaryPalette('indigo')
+        .accentPalette('pink');
         $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
       }]);
 
