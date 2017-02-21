@@ -224,7 +224,9 @@
             <md-card ng-href="#/post/287897" class="post-wrapper">
               <md-card-header>
                 <md-card-avatar>
-                  <img src="https://avatars0.githubusercontent.com/u/16052650?v=3&s=460"/>
+                  <a ng-href="#!/img1">
+                    <img src="https://avatars0.githubusercontent.com/u/16052650?v=3&s=460"/>
+                  </a>
                 </md-card-avatar>
                 <md-card-header-text>
                   <span>
@@ -395,8 +397,8 @@
                   <span class="md-subhead">2 days ago</span>
                 </md-card-header-text>
               </md-card-header>
-
-              <div ng-controller="gridListDemoCtrl as vm" flex ng-cloak style="background-color:#dadada" class="gridListdemoDynamicTiles">
+              <md-divider></md-divider>
+              <div ng-controller="gridListDemoCtrl as vm" flex ng-cloak style="background-color:#e8e8e8" class="gridListdemoDynamicTiles">
                 <md-grid-list
                       md-cols="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="6"
                       md-row-height-gt-md="1:1" md-row-height="4:3"
@@ -413,6 +415,7 @@
                   </md-grid-tile>
                 </md-grid-list>
               </div>
+              <md-divider></md-divider>
 
               <md-card-title>
                <md-card-title-text>
