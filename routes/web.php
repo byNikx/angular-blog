@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/template/post/{type}', function ($type) {
+    $url = 'templates.posts.'.$type.'-post';
+    return view($url);
+});
