@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ config('app.locale') }}">
   <head>
+    <base href="/">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -199,7 +200,7 @@
       </section>
       <nx-container>
       <div class="md-toolbar-tools">
-          <md-button class="md-icon-button">
+          <md-button class="md-icon-button" ui-sref="/">
             <md-icon>menu</md-icon>
           </md-button>
           <h2>Tech</h2>
@@ -217,22 +218,7 @@
       </div>
     </nx-container>
     </md-toolbar>
-    <section flex style="overflow:auto">
-
-      <nx-container layout="row" layout-margin>
-        <section flex>
-            <h3 class="md-headline label-type-1" layout-margin>Yesterday</h3>
-            <nx-post ng-repeat="category in ['text', 'text', 'text', 'gallery', 'video', 'image', 'text', 'video', 'text'] track by $index" category="{[{category}]}"></nx-post>
-        </section>
-        <section style="width:340px;" hide-xs>
-          <h3 class="md-headline label-type-1" layout-margin>Recent Activity</h3>
-          <md-card>
-            <div style="height:100px;"></div>
-          </md-card>
-        </section>
-      </nx-container>
-
-    </section>
+    <section flex ui-view style="overflow:auto"></section>
     <!-- Angular Material requires Angular.js Libraries -->
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
@@ -248,7 +234,7 @@
       /**
       * You must include the dependency on 'ngMaterial'
       */
-      var app = angular.module('NXBlog', ['ngMaterial']);
+      var app = angular.module('NXBlog', ['ngMaterial', 'ui.router']);
 
       app.directives = {};
 
@@ -318,7 +304,31 @@
         }
       });
 
-      app.config(['$interpolateProvider', '$mdThemingProvider', function($interpolateProvider, $mdThemingProvider){
+      app.config(['$interpolateProvider', '$mdThemingProvider', '$locationProvider', '$stateProvider', function($interpolateProvider, $mdThemingProvider, $locationProvider, $stateProvider){
+        var helloState = {
+          name: 'hello',
+          url: '/hello',
+          template: '<h3>hello world!</h3>'
+        }
+
+        var aboutState = {
+          name: 'about',
+          url: '/about',
+          template: '<h3>Its the UI-Router hello world app!</h3>'
+        }
+
+        var homeState = {
+          name: 'home',
+          url: '/home',
+          templateUrl: '/template/home'
+        }
+
+        $stateProvider.state(helloState);
+        $stateProvider.state(aboutState);
+        $stateProvider.state(homeState);
+
+//        $locationProvider.html5Mode(true).hashPrefix('!')
+
         $mdThemingProvider.theme('default')
         .primaryPalette('indigo')
         .accentPalette('pink');

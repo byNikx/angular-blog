@@ -16,6 +16,9 @@ Route::get('/', function () {
 });
 
 Route::get('/template/post/{type}', function ($type) {
-    $url = 'templates.posts.'.$type.'-post';
+    $url = 'templates.posts.'.$type.'-post-tpl';
     return view($url);
+});
+Route::get('/template/home', function () {
+    return view('templates.home.home-tpl');
 });
