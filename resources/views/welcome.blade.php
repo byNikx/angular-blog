@@ -304,7 +304,7 @@
         }
       });
 
-      app.config(['$interpolateProvider', '$mdThemingProvider', '$locationProvider', '$stateProvider', function($interpolateProvider, $mdThemingProvider, $locationProvider, $stateProvider){
+      app.config(['$interpolateProvider', '$mdThemingProvider', '$locationProvider', '$stateProvider', '$urlRouterProvider', function($interpolateProvider, $mdThemingProvider, $locationProvider, $stateProvider, $urlRouterProvider){
         var helloState = {
           name: 'hello',
           url: '/hello',
@@ -323,9 +323,17 @@
           templateUrl: '/template/home'
         }
 
+        var notFoundState = {
+          name: 'not-found',
+          url: '/not-found',
+          template: 'Page not found!'
+        }
+
         $stateProvider.state(helloState);
         $stateProvider.state(aboutState);
         $stateProvider.state(homeState);
+        $stateProvider.state(notFoundState);
+        $urlRouterProvider.otherwise('/not-found');
 
 //        $locationProvider.html5Mode(true).hashPrefix('!')
 
