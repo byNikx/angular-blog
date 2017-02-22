@@ -1,7 +1,9 @@
 <md-card ng-href="#/post/287897" class="post-wrapper">
   <md-card-header>
     <md-card-avatar>
-      <img src="https://avatars0.githubusercontent.com/u/16052650?v=3&s=460"/>
+      <a ng-href="#!/img1">
+        <img src="https://avatars0.githubusercontent.com/u/16052650?v=3&s=460"/>
+      </a>
     </md-card-avatar>
     <md-card-header-text>
       <span>

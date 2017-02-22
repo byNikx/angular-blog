@@ -63,6 +63,7 @@
     .post-wrapper .post-title, .post-owner{
       text-decoration: none;
       color: rgba(0, 0, 0, 0.87);
+      display: inline-block;
     }
 
     .no-margin{
@@ -185,9 +186,9 @@
     </style>
 
     <title>Angular Laravel - App</title>
-    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
   <body ng-app="NXBlog" ng-cloak layout="column">
     <md-toolbar md-whiteframe>
@@ -221,16 +222,7 @@
       <nx-container layout="row" layout-margin>
         <section flex>
             <h3 class="md-headline label-type-1" layout-margin>Yesterday</h3>
-
-            <nx-post category="video"></nx-post>
-
-            <nx-post category="image"></nx-post>
-
-            <nx-post category="text"></nx-post>
-
-            <nx-post category="video"></nx-post>
-
-            <nx-post category="gallery"></nx-post>
+            <nx-post ng-repeat="category in ['text', 'text', 'text', 'gallery', 'video', 'image', 'text', 'video', 'text'] track by $index" category="{[{category}]}"></nx-post>
         </section>
         <section style="width:340px;" hide-xs>
           <h3 class="md-headline label-type-1" layout-margin>Recent Activity</h3>
@@ -242,13 +234,14 @@
 
     </section>
     <!-- Angular Material requires Angular.js Libraries -->
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <script src="//unpkg.com/angular-ui-router@0.3.1/release/angular-ui-router.js"></script>
 
     <!-- Angular Material Library -->
-    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
 
     <!-- Your application bootstrap  -->
     <script type="text/javascript">
@@ -260,14 +253,16 @@
       app.directives = {};
 
       app.directives.PostImpl = [function(){
+        var linkImpl = function(scope, element, attr) {
+             scope.getPostUrl = function() {
+                  return '/template/post/'+attr.category;
+             }
+         };
+
         return {
           restrict : 'AE',
-          scope :{
-            category : '='
-          },
-          templateUrl : function(element, attr){
-            return '/template/post/'+attr.category;
-          }
+          link : linkImpl,
+           template : '<div ng-include="getPostUrl()"></div>'
         };
       }];
 

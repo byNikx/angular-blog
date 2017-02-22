@@ -2,13 +2,13 @@
   <md-card-header>
     <md-card-avatar>
       <a ng-href="#!/img1">
-        <img src="https://avatars0.githubusercontent.com/u/16052650?v=3&s=460"/>
+        <img src="https://s3.amazonaws.com/uifaces/faces/twitter/vladzima/128.jpg"/>
       </a>
     </md-card-avatar>
     <md-card-header-text>
       <span>
         <a ng-href="#/nikx-fabrizio/" class="post-owner">
-          <span class="md-title">Nikx Fabrizio</span>
+          <span class="md-title">James Trench</span>
         </a>
       </span>
       <span class="md-subhead">2 days ago</span>
