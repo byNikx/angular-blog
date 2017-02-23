@@ -102,6 +102,9 @@
        margin-right: 0;
      }
 
+     .nx-card-actions {
+        padding: .5em;
+    }
 
 
 
@@ -200,7 +203,7 @@
       </section>
       <nx-container>
       <div class="md-toolbar-tools">
-          <md-button class="md-icon-button" ui-sref="/">
+          <md-button class="md-icon-button" ui-sref="home">
             <md-icon>menu</md-icon>
           </md-button>
           <h2>Tech</h2>
@@ -239,9 +242,9 @@
       app.directives = {};
 
       app.directives.PostImpl = [function(){
-        var linkImpl = function(scope, element, attr) {
+        var linkImpl = function(scope, element, attrs) {
              scope.getPostUrl = function() {
-                  return '/template/post/'+attr.category;
+                  return '/template/post/'+attrs.size+'/'+attrs.category;
              }
          };
 
@@ -252,7 +255,18 @@
         };
       }];
 
+      app.directives.nxCardActions = [function(){
+        let linkImpl = function(scope, element, attr){
+          element.addClass('nx-card-actions');
+        }
+        return {
+          restrict : 'AEC',
+          link : linkImpl
+        }
+      }];
+
       app.directive('nxPost', app.directives.PostImpl);
+      app.directive('nxCardActions', app.directives.nxCardActions);
 
       app.controller('gridListDemoCtrl', function($scope) {
 
@@ -311,16 +325,16 @@
           template: '<h3>hello world!</h3>'
         }
 
-        var aboutState = {
-          name: 'about',
-          url: '/about',
-          template: '<h3>Its the UI-Router hello world app!</h3>'
+        var postViewState = {
+          name: 'post-view',
+          url: '/post/view',
+          templateUrl: '/post/view'
         }
 
         var homeState = {
           name: 'home',
           url: '/home',
-          templateUrl: '/template/home'
+          templateUrl: '/home'
         }
 
         var notFoundState = {
@@ -330,7 +344,7 @@
         }
 
         $stateProvider.state(helloState);
-        $stateProvider.state(aboutState);
+        $stateProvider.state(postViewState);
         $stateProvider.state(homeState);
         $stateProvider.state(notFoundState);
         $urlRouterProvider.otherwise('/not-found');

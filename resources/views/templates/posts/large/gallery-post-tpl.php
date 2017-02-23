@@ -2,18 +2,38 @@
   <md-card-header>
     <md-card-avatar>
       <a ng-href="#!/img1">
-        <img src="https://avatars0.githubusercontent.com/u/16052650?v=3&s=460"/>
+        <img src="https://s3.amazonaws.com/uifaces/faces/twitter/ripplemdk/128.jpg"/>
       </a>
     </md-card-avatar>
     <md-card-header-text>
       <span>
         <a ng-href="#/nikx-fabrizio/" class="post-owner">
-          <span class="md-title">Nikx Fabrizio</span>
+          <span class="md-title">Roger Doughlas</span>
         </a>
       </span>
       <span class="md-subhead">2 days ago</span>
     </md-card-header-text>
   </md-card-header>
+  <md-divider></md-divider>
+  <div ng-controller="gridListDemoCtrl as vm" flex ng-cloak style="background-color:#e8e8e8" class="gridListdemoDynamicTiles">
+    <md-grid-list
+          md-cols="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="6"
+          md-row-height-gt-md="1:1" md-row-height="4:3"
+          md-gutter="8px" md-gutter-gt-sm="4px" >
+
+      <md-grid-tile ng-repeat="tile in vm.tiles"
+                    md-rowspan="{[{tile.span.row}]}"
+                    md-colspan="{[{tile.span.col}]}"
+                    md-colspan-sm="1"
+                    md-colspan-xs="1"
+                    ng-class="tile.background" >
+        <md-icon md-svg-icon="{[{tile.icon}]}"></md-icon>
+        <md-grid-tile-footer><h3>{[{tile.title}]}</h3></md-grid-tile-footer>
+      </md-grid-tile>
+    </md-grid-list>
+  </div>
+  <md-divider></md-divider>
+
   <md-card-title>
    <md-card-title-text>
      <div>
@@ -23,6 +43,7 @@
      </div>
    </md-card-title-text>
  </md-card-title>
+
   <md-card-content>
     <p>
       The titles of Washed Out's breakthrough song and the first single from Paracosm share the
