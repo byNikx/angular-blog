@@ -19,6 +19,9 @@ Route::get('/template/post/{size}/{type}', function ($size='large', $type) {
     $url = 'templates.posts.'.join('.', array($size, $type)).'-post-tpl';
     return view($url);
 });
+Route::get('/template/comment-box', function () {
+    return view('templates.comment-box.comment-box-tpl');
+});
 Route::get('/home', function () {
     return view('templates.home.home-tpl');
 });

@@ -360,8 +360,8 @@
 
 
 
-      app.impl = app.impl || {};
-      app.impl.nxContainer = ['$mdMedia', function($mdMedia){
+
+      app.directives.nxContainer = ['$mdMedia', function($mdMedia){
 
         let linkImpl = function(scope, element, attr){
           scope.$mdMedia = $mdMedia;
@@ -408,7 +408,7 @@
       }];
 
 
-      app.impl.nxPaper = [function(){
+      app.directives.nxPaper = [function(){
         let linkImpl = function(scope, element, attr){
           element.addClass('nx-paper md-whiteframe-1dp');
         }
@@ -418,10 +418,26 @@
         }
       }];
 
+      app.directives.nxCommentBox = ['$mdMedia',function($mdMedia){
+        let linkImpl = function(scope, element, attr){
+            scope.$mdMedia = $mdMedia;
+//          element.addClass('nx-paper md-whiteframe-1dp');
+        }
+        return {
+          restrict : 'AE',
+          scope:{
+            comments:'@'
+          },
+          link: linkImpl,
+          templateUrl : '/template/comment-box'
+        }
+      }];
 
 
-      app.directive('nxContainer', app.impl.nxContainer);
-      app.directive('nxPaper', app.impl.nxPaper);
+
+      app.directive('nxContainer', app.directives.nxContainer);
+      app.directive('nxPaper', app.directives.nxPaper);
+      app.directive('nxCommentBox', app.directives.nxCommentBox);
     </script>
   </body>
 </html>
