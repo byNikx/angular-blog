@@ -232,12 +232,25 @@
     <!-- Angular Material Library -->
     <script src="//ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+
     <!-- Your application bootstrap  -->
     <script type="text/javascript">
       /**
       * You must include the dependency on 'ngMaterial'
       */
-      var app = angular.module('NXBlog', ['ngMaterial', 'ui.router']);
+
+    angular.module('SimpleMDE',[])
+        .factory('SimpleMDE', ['$window', function($window){
+          if(!$window.SimpleMDE)
+              throw ReferenceError('SimpleMDE is not defined.')
+
+          return $window.SimpleMDE;
+        }]);
+
+
+      var app = angular.module('NXBlog', ['ngMaterial', 'ui.router', 'SimpleMDE']);
 
       app.directives = {};
 
@@ -255,6 +268,17 @@
         };
       }];
 
+      app.directives.MarkDownImpl = ['SimpleMDE', function(SimpleMDE){
+        var linkImpl = function(scope, element, attrs) {
+            new SimpleMDE();
+         };
+
+        return {
+          restrict : 'AE',
+          link:linkImpl
+        };
+      }];
+
       app.directives.nxCardActions = [function(){
         let linkImpl = function(scope, element, attr){
           element.addClass('nx-card-actions');
@@ -265,6 +289,8 @@
         }
       }];
 
+
+      app.directive('nxMarkdown', app.directives.MarkDownImpl);
       app.directive('nxPost', app.directives.PostImpl);
       app.directive('nxCardActions', app.directives.nxCardActions);
 
@@ -326,7 +352,7 @@
         }
 
         var postViewState = {
-          name: 'post-view',
+          name: 'postView',
           url: '/post/view',
           templateUrl: '/post/view'
         }
@@ -337,8 +363,14 @@
           templateUrl: '/home'
         }
 
+        var newPostState = {
+          name: 'newPost',
+          url: '/post/new',
+          templateUrl: '/post/new'
+        }
+
         var notFoundState = {
-          name: 'not-found',
+          name: 'notFound',
           url: '/not-found',
           template: 'Page not found!'
         }
@@ -346,8 +378,9 @@
         $stateProvider.state(helloState);
         $stateProvider.state(postViewState);
         $stateProvider.state(homeState);
+        $stateProvider.state(newPostState);
         $stateProvider.state(notFoundState);
-        $urlRouterProvider.otherwise('/not-found');
+        $urlRouterProvider.otherwise('/notFound');
 
 //        $locationProvider.html5Mode(true).hashPrefix('!')
 

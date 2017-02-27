@@ -29,3 +29,7 @@ Route::get('/post/view', function () {
     $url = 'templates.posts.preview.post-tpl';
     return view($url);
 });
+Route::get('/post/new', function () {
+    $url = 'templates.posts.new.new-post-tpl';
+    return view($url);
+});

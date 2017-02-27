@@ -43,19 +43,21 @@
       <md-icon hide-gt-sm>add</md-icon>
       <span hide show-gt-sm>New Comment<span></md-button>
   </md-card-header>
+  <form name="commentForm" novalidate>
   <md-card-content ng-show="post.commenting" style="padding-bottom:0">
     <md-input-container class="md-icon-float md-block" flex>
       <!-- Use floating label instead of placeholder -->
       <label>Comment</label>
       <md-icon class="name">insert_comment</md-icon>
-      <textarea ng-model="user.biography" md-maxlength="150" rows="1" md-select-on-focus placeholder="write here..."></textarea>
+      <textarea ng-required="true" ng-model="user.biography" md-maxlength="150" rows="1" md-select-on-focus placeholder="write here..."></textarea>
     </md-input-container>
   </md-card-content>
   <nx-card-actions layout layout-align="end center" ng-if="post.commenting" style="padding-top:0;">
-    <md-button class="md-raised md-accent" ng-click="post.comment.posting=true">
+    <md-button class="md-raised md-accent" ng-click="post.comment.posting=true" ng-disabled="!commentForm.$valid">
        Comment
     </md-button>
   </nx-card-actions>
+</form>
   <md-list class="comment-list" flex>
     <md-subheader class="md-no-sticky">29 comments</md-subheader>
     <md-list-item class="md-3-line md-long-text" ng-repeat="item in [1,2,3,4,5,6]">
