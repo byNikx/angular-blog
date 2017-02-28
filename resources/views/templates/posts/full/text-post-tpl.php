@@ -17,7 +17,7 @@
   <md-card-title>
    <md-card-title-text>
      <div>
-       <h2 class="md-display-1 no-margin post-title">Right and Bottom Constraint of labels inside container view of Scrollview are not working properly?</h2>
+       <h2 class="md-headline no-margin post-title">Right and Bottom Constraint of labels inside container view of Scrollview are not working properly?</h2>
      </div>
    </md-card-title-text>
  </md-card-title>

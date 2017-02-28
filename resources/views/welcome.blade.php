@@ -212,6 +212,7 @@
               <span>{[{ item.display }]}</span>
             </md-autocomplete>
           </div>
+          <md-button ui-sref="newPost">New Post</md-button>
           <div hide-xs layout layout-align="center center">
             <md-button class="md-icon-button">
               <md-icon>notifications</md-icon>
@@ -228,12 +229,12 @@
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
     <script src="//unpkg.com/angular-ui-router@0.3.1/release/angular-ui-router.js"></script>
-
+    <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.3/angular-sanitize.js"></script>
     <!-- Angular Material Library -->
     <script src="//ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    <script src="/js/ckeditor-angular.js"></script>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
-    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 
     <!-- Your application bootstrap  -->
     <script type="text/javascript">
@@ -241,16 +242,8 @@
       * You must include the dependency on 'ngMaterial'
       */
 
-    angular.module('SimpleMDE',[])
-        .factory('SimpleMDE', ['$window', function($window){
-          if(!$window.SimpleMDE)
-              throw ReferenceError('SimpleMDE is not defined.')
 
-          return $window.SimpleMDE;
-        }]);
-
-
-      var app = angular.module('NXBlog', ['ngMaterial', 'ui.router', 'SimpleMDE']);
+      var app = angular.module('NXBlog', ['ngMaterial', 'ui.router', 'ckeditor', 'ngSanitize']);
 
       app.directives = {};
 
@@ -268,17 +261,6 @@
         };
       }];
 
-      app.directives.MarkDownImpl = ['SimpleMDE', function(SimpleMDE){
-        var linkImpl = function(scope, element, attrs) {
-            new SimpleMDE();
-         };
-
-        return {
-          restrict : 'AE',
-          link:linkImpl
-        };
-      }];
-
       app.directives.nxCardActions = [function(){
         let linkImpl = function(scope, element, attr){
           element.addClass('nx-card-actions');
@@ -290,7 +272,6 @@
       }];
 
 
-      app.directive('nxMarkdown', app.directives.MarkDownImpl);
       app.directive('nxPost', app.directives.PostImpl);
       app.directive('nxCardActions', app.directives.nxCardActions);
 
