@@ -2,18 +2,20 @@
   <section flex>
       <form name="postForm">
         <md-card>
+          <md-card-content>
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Post Title</label>
+              <input ng-model="user.firstName">
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Post Title</label>
+              <input ng-model="user.firstName">
+            </md-input-container>
+          </md-card-content>
           <div ckeditor ng-model="text"></div>
         </md-card>
       </form>
-      <style>
-        .test-preview img{
-          max-width: 100%;
-        }
-        .test-preview h1{
-          font-size: 13px
-        }
-      </style>
-      <section ng-bind-html="text" class="test-preview"></section>
+      <section ng-bind="text" class="test-preview"></section>
   </section>
   <section style="width:340px;" hide show-gt-sm>
     <h3 class="md-headline label-type-1" layout-margin>Recent Activity</h3>

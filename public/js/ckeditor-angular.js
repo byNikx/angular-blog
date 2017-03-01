@@ -41,6 +41,24 @@
         // Initialize the editor content when it is ready.
         controller.ready().then(function initialize() {
           // Sync view on specific events.
+
+          var dataProcessor = controller.instance.dataProcessor,
+            dataFilter = dataProcessor && dataProcessor.dataFilter,
+            htmlFilter = dataProcessor && dataProcessor.htmlFilter;
+
+              // This rewrites incoming (GET, viewing) data
+              if (dataFilter) {
+                  dataFilter.addRules({
+                      elements:{
+                          'h1': function (element) {
+                          element.addClass('md-display-4');
+                          return element;
+                          }
+                        }
+                  });
+              }
+
+
           ['dataReady', 'change', 'blur', 'saveSnapshot'].forEach(function (event) {
             controller.onCKEvent(event, function syncView() {
               ngModelController.$setViewValue(controller.instance.getData() || '');
