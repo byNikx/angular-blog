@@ -12,6 +12,11 @@
   <section flex>
       <form name="postForm">
         <md-card>
+          <md-card-title>
+            <md-card-title-text>
+              <span class="md-headline">New Post</span>
+            </md-card-title-text>
+          </md-card-title>
           <md-card-content>
             <md-input-container class="md-block" flex-gt-sm>
               <label>Post Title</label>
