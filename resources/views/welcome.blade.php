@@ -233,7 +233,12 @@
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.3/angular-sanitize.js"></script>
     <!-- Angular Material Library -->
     <script src="//ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
-    <script src="/js/ckeditor-angular.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.min.js"></script>
+    <script src="/js/simplemde-angular.js"></script>
+    <script src="/js/marked-angular.js"></script>
+    <link rel="stylesheet" href="/css/post-preview.css"/>
 
 
     <!-- Your application bootstrap  -->
@@ -243,7 +248,8 @@
       */
 
 
-      var app = angular.module('NXBlog', ['ngMaterial', 'ui.router', 'ckeditor', 'ngSanitize']);
+
+      var app = angular.module('NXBlog', ['ngMaterial', 'ui.router', 'simplemde', 'ngSanitize', 'hc.marked']);
 
       app.directives = {};
 
@@ -325,12 +331,9 @@
         }
       });
 
-      app.config(['$interpolateProvider', '$mdThemingProvider', '$locationProvider', '$stateProvider', '$urlRouterProvider', function($interpolateProvider, $mdThemingProvider, $locationProvider, $stateProvider, $urlRouterProvider){
-        var helloState = {
-          name: 'hello',
-          url: '/hello',
-          template: '<h3>hello world!</h3>'
-        }
+      app.config(['$interpolateProvider', '$mdThemingProvider', '$locationProvider', '$stateProvider', '$urlRouterProvider', 'markedProvider', function($interpolateProvider, $mdThemingProvider, $locationProvider, $stateProvider, $urlRouterProvider, markedProvider){
+
+        markedProvider.setOptions({gfm: true});
 
         var postViewState = {
           name: 'postView',
@@ -356,7 +359,6 @@
           template: 'Page not found!'
         }
 
-        $stateProvider.state(helloState);
         $stateProvider.state(postViewState);
         $stateProvider.state(homeState);
         $stateProvider.state(newPostState);

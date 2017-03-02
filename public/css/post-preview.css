@@ -1,0 +1,38 @@
+#post-preview {
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+#post-preview h1, #post-preview h2, #post-preview h3, #post-preview h4, #post-preview h5, #post-preview h6 {
+  margin: 0;
+}
+#post-preview h1 {
+  font-size: 11.20rem;
+  font-weight: 300;
+  letter-spacing: -0.010em;
+  line-height: 11.20rem;
+}
+#post-preview h2 {
+  font-size: 5.600rem;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  line-height: 5.600rem;
+}
+#post-preview h3 {
+  font-size: 4.500rem;
+  font-weight: 400;
+  line-height: 6.400rem;
+}
+#post-preview h4 {
+  font-size: 3.400rem;
+  font-weight: 400;
+  line-height: 4rem;
+}
+#post-preview h5 {
+  font-size: 2.400rem;
+  font-weight: 400;
+  line-height: 3.2rem;
+}
+#post-preview h6 {
+  font-size: 2.000rem;
+  font-weight: 500;
+  letter-spacing: 0.005em;
+}

@@ -42,20 +42,42 @@
         controller.ready().then(function initialize() {
           // Sync view on specific events.
 
+          var materialRules = {
+            elements: {
+              h1: function(element){
+                element.attributes.class = 'md-display-4';
+                return element;
+              },
+              h2: function(element){
+                element.attributes.class = 'md-display-3';
+                return element;
+              },
+              h3: function(element){
+                element.attributes.class = 'md-display-2';
+                return element;
+              },
+              h4: function(element){
+                element.attributes.class = 'md-display-1';
+                return element;
+              },
+              h5: function(element){
+                element.attributes.class = 'md-headline';
+                return element;
+              },
+              h6: function(element){
+                element.attributes.class = 'md-title';
+                return element;
+              }
+            }
+          };
+
           var dataProcessor = controller.instance.dataProcessor,
             dataFilter = dataProcessor && dataProcessor.dataFilter,
             htmlFilter = dataProcessor && dataProcessor.htmlFilter;
 
               // This rewrites incoming (GET, viewing) data
               if (dataFilter) {
-                  dataFilter.addRules({
-                      elements:{
-                          'h1': function (element) {
-                          element.addClass('md-display-4');
-                          return element;
-                          }
-                        }
-                  });
+                  htmlFilter.addRules(materialRules);
               }
 
 
@@ -105,6 +127,9 @@
     var editorElement = $element[0];
     var instance;
     var readyDeferred = $q.defer(); // a deferred to be resolved when the editor is ready
+    config.format_tags = 'p;h1;h2;h3;h4;h5;h6;pre;address;div';
+    //config.contentsCss = '';
+
 
     // Create editor instance.
     if (editorElement.hasAttribute('contenteditable') &&
@@ -114,6 +139,18 @@
     else {
       instance = this.instance = CKEDITOR.replace(editorElement, config);
     }
+
+    instance.addCommand('noMargin', {
+      exec: function(editor){
+        alert('No Margin Working!');
+      }
+    });
+
+    instance.ui.addButton('noMarginButton', {
+      label: 'No Margin',
+      command: 'noMargin',
+      toolbar: 'insert'
+    });
 
     /**
      * Listen on events of a given type.
