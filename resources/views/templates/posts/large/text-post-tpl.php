@@ -18,7 +18,7 @@
    <md-card-title-text>
      <div>
        <a ng-href="#/post/view" class="post-title">
-         <h2 class="md-headline no-margin">In-card mixed actions</h2>
+         <h2 class="md-headline no-margin">Right and Bottom Constraint of labels inside container view of Scrollview are not working properly?</h2>
        </a>
      </div>
    </md-card-title-text>

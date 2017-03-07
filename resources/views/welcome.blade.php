@@ -212,6 +212,7 @@
               <span>{[{ item.display }]}</span>
             </md-autocomplete>
           </div>
+          <span hide-gt-xs flex></span>
           <md-button ui-sref="newPost">New Post</md-button>
           <div hide-xs layout layout-align="center center">
             <md-button class="md-icon-button">

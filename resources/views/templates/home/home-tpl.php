@@ -7,10 +7,7 @@
     <h3 class="md-headline label-type-1" layout-margin>Recent Activity</h3>
     <md-card>
       <div style="height:100px;">
-        <a ui-sref="hello" ui-sref-active="active">Hello</a>
-        <a ui-sref="about" ui-sref-active="active">About</a>
-
-        <ui-view></ui-view>
+        
       </div>
     </md-card>
   </section>
